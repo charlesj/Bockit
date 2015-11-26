@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel;
+using Pancakes.Exceptions;
+using Pancakes.ErrorCodes;
 
 namespace Pancakes
 {
@@ -15,11 +17,11 @@ namespace Pancakes
         public object Convert(object value, Type targetType)
         {
             if(value == null)
-                throw new ArgumentNullException(nameof(value));
+                throw new PancakesArgumentNullException(PancakesErrorCodes.NullTypeConversion, nameof(value));
             var converter = TypeDescriptor.GetConverter(targetType);
 			if (!converter.IsValid(value) || !converter.CanConvertFrom(value.GetType()))
 			{
-				throw new InvalidOperationException("Attempted to convert to a type that was not valid.");
+				throw new PancakesInvalidOperationException(PancakesErrorCodes.InvalidTypeConversion);
 			}
 
 			if (value is string)

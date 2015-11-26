@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Pancakes;
+using Pancakes.Exceptions;
+using Pancakes.ErrorCodes;
 
 namespace Pancakes.Tests
 {
@@ -30,13 +32,28 @@ namespace Pancakes.Tests
 		[InlineData("truthy", typeof(bool))]
         public void ThrowsExceptionWhenInvalidConversion(object source, Type target)
         {
-            Assert.Throws<InvalidOperationException>(() => this.typeConverter.Convert(source, target));
+            try 
+            {
+                this.typeConverter.Convert(source, target);
+            } 
+            catch(PancakesInvalidOperationException exception)
+            {
+                Assert.Equal(PancakesErrorCodes.InvalidTypeConversion, exception.ErrorCode);
+            }
         }
         
         [Fact]
         public void ThrowsNullArgumentExceptionWhenPassNullValue()
         {
-            Assert.Throws<ArgumentNullException>(() => this.typeConverter.Convert(null, typeof(string)));
+            try
+            {
+                this.typeConverter.Convert(null, typeof(string));
+            }
+            catch (PancakesArgumentNullException exception)
+            {
+                Assert.Equal(PancakesErrorCodes.NullTypeConversion, exception.ErrorCode);
+                Assert.Equal("value", exception.ParamName);                
+            }
         }
         
         [Fact]
