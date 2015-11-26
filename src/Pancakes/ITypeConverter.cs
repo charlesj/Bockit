@@ -18,18 +18,22 @@ namespace Pancakes
         {
             if(value == null)
                 throw new PancakesArgumentNullException(PancakesErrorCodes.NullTypeConversion, nameof(value));
-            var converter = TypeDescriptor.GetConverter(targetType);
-			if (!converter.IsValid(value) || !converter.CanConvertFrom(value.GetType()))
-			{
-				throw new PancakesInvalidOperationException(PancakesErrorCodes.InvalidTypeConversion);
-			}
-
-			if (value is string)
-			{
-				return converter.ConvertFromString(value as string);
-			}
-
-			return converter.ConvertTo(value, targetType);
+            
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(targetType);
+    
+                if (value is string)
+                {
+                    return converter.ConvertFromString(value as string);
+                }
+    
+                return converter.ConvertTo(value, targetType);
+            }
+            catch(Exception exception)
+            {
+                throw new PancakesInvalidOperationException(PancakesErrorCodes.InvalidTypeConversion, exception);
+            }
         }
 
         public TTargetType Convert<TTargetType>(object value)

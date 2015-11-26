@@ -7,7 +7,7 @@ namespace Pancakes.Exceptions
     {
 		private PancakesInvalidOperationException(){}
 		
-		public PancakesInvalidOperationException(ErrorCode errorCode)
+		public PancakesInvalidOperationException(ErrorCode errorCode, Exception innerException) : base(errorCode.ToString(), innerException)
 		{
 			this.ErrorCode = errorCode;
 		}
