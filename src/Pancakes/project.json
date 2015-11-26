@@ -1,25 +1,31 @@
 {
   "version": "1.0.0-*",
   "description": "Pancakes Class Library",
-  "authors": [ "Class Library template" ],
-  "tags": [""],
+  "authors": [
+    "josh.charles@gmail.com"
+  ],
+  "tags": [
+    ""
+  ],
   "projectUrl": "",
   "licenseUrl": "",
   "tooling": {
     "defaultNamespace": "Pancakes"
   },
-
   "frameworks": {
-    "dnx451": { },
+    "dnx451": {},
     "dnxcore50": {
       "dependencies": {
         "Microsoft.CSharp": "4.0.1-beta-*",
         "System.Collections": "4.0.11-beta-*",
         "System.Linq": "4.0.1-beta-*",
         "System.Runtime": "4.0.21-beta-*",
-        "System.Threading": "4.0.11-beta-*", 
+        "System.Threading": "4.0.11-beta-*",
         "System.ComponentModel.TypeConverter": "4.0.1-beta-*"
       }
     }
+  },
+  "dependencies": {
+    "Newtonsoft.json": "8.0.1-beta3"
   }
 }
