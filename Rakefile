@@ -19,3 +19,13 @@ task :restore do
 	end
   end
 end
+
+task :build do
+  Dir.entries('src').select do |entry| 
+  	if File.directory? File.join('src', entry) and !(entry =='.' || entry == '..')
+  		Dir.chdir File.join('src', entry)
+  		sh "dnu build"
+		Dir.chdir "../../"
+	end
+  end
+end
