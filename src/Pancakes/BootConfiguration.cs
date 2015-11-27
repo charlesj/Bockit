@@ -27,9 +27,12 @@ namespace Pancakes
 
         public bool BeVerbose { get; private set; }
 		
-		public static BootConfiguration DefaultConfiguration()
+		public static BootConfiguration DefaultConfiguration
 		{
-			return new BootConfiguration();
+			get 
+			{
+				return new BootConfiguration();
+			}
 		}
 
         public void Boot()

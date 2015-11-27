@@ -17,7 +17,7 @@ namespace Pancakes
 				if(this.serviceLocator == null)
 					throw new PancakesInvalidOperationException(PancakesErrorCodes.AccessServiceLocatorPreBoot);
 				
-				throw new NotImplementedException();
+				return this.serviceLocator;
 			} 
 		}
 
@@ -25,6 +25,7 @@ namespace Pancakes
 		{
 			configuration.Boot();
 			this.BootConfiguration = configuration;
+			this.serviceLocator = new NinjectServiceLocator(configuration);
 		}
 	}
 }

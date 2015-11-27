@@ -30,5 +30,14 @@ namespace Pancakes.Tests
 				Assert.Equal(PancakesErrorCodes.AccessServiceLocatorPreBoot, exception.ErrorCode);
 			}
 		}
+		
+		[Fact]
+		public void AccessServiceLocator_PostBoot_ReturnsLocator()
+		{
+			var kernel = new Kernel();
+			kernel.Boot(BootConfiguration.DefaultConfiguration);
+			var locator = kernel.ServiceLocator;
+			Assert.NotNull(locator);			
+		}
 	}
 }
