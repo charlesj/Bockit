@@ -4,9 +4,9 @@ namespace BockitServer.Services
 {
     public class RequestProcessor
 	{
-		public string Process(string request)
+		public string Process(HttpContext context)
 		{
-			return request;
+			return "Hello World";
 		}
 	}	
 }

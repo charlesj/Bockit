@@ -1,24 +1,35 @@
-using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using BockitServer.Services;
 using Microsoft.AspNet.Http;
+using Ninject;
+using Ninject.MockingKernel.NSubstitute;
+using NSubstitute;
 using Xunit;
 
 namespace BockitServer.UnitTests
 {
-    public class RequestProcessorRequests
+    public class RequestProcessorRequests : BaseUnitTest<RequestProcessor>
     {
         public class Process : RequestProcessorRequests
         {
             [Fact]
             public void Echos()
             {
-                var request = "wokka wokka";
-                var processor = new RequestProcessor();
-                Assert.Equal(request, processor.Process(request));
+                var context = Substitute.For<HttpContext>();
+                var response = this.SystemUnderTest.Process(context);
+                Assert.Equal("Hello World", response);
             }
         }
+    }
+    
+    public class BaseUnitTest<TSystemUnderTest>
+    {
+        public BaseUnitTest()
+        {
+            var kernel = new NSubstituteMockingKernel();
+            kernel.Bind<TSystemUnderTest>().To<TSystemUnderTest>();
+            this.SystemUnderTest = kernel.Get<TSystemUnderTest>();
+        }
+        
+        public TSystemUnderTest SystemUnderTest {get; private set;}
     }
 }

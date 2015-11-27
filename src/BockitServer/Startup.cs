@@ -15,7 +15,7 @@ namespace BockitServer
             var processor = new RequestProcessor();
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync(processor.Process(context.Request.QueryString.ToString()));
+                await context.Response.WriteAsync(processor.Process(context));
             });
         }
     }
