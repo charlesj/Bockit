@@ -15,7 +15,8 @@
   "dependencies": {
     "Pancakes": "1.0.0",
     "xunit": "2.1.0",
-    "xunit.runner.dnx": "2.1.0-rc1-build204"
+    "xunit.runner.dnx": "2.1.0-rc1-build204",
+    "ninject": "3.2.3-unstable-012"
   },
   "commands": {
     "test": "xunit.runner.dnx"

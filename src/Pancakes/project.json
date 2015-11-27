@@ -16,6 +16,7 @@
     "dnx451": {}
   },
   "dependencies": {
-    "Newtonsoft.json": "7.0.1"
+    "Newtonsoft.json": "7.0.1",
+    "ninject": "3.2.3-unstable-012"
   }
 }

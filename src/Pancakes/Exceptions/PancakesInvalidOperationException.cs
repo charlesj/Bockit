@@ -5,13 +5,18 @@ namespace Pancakes.Exceptions
 {
     public class PancakesInvalidOperationException : InvalidOperationException, IPancakesException
     {
-		private PancakesInvalidOperationException(){}
+        private PancakesInvalidOperationException(){}
 		
 		public PancakesInvalidOperationException(ErrorCode errorCode, Exception innerException) : base(errorCode.ToString(), innerException)
 		{
 			this.ErrorCode = errorCode;
 		}
-		
+
+        public PancakesInvalidOperationException(ErrorCode errorCode)
+        {
+            this.ErrorCode = errorCode;
+        }
+
         public ErrorCode ErrorCode {get; private set;}        
     }
 }
