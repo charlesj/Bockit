@@ -4,9 +4,15 @@ namespace BockitServer.Services
 {
     public class RequestProcessor
 	{
-		public string Process(HttpContext context)
+		private readonly IResponseWriter writer;
+		public RequestProcessor(IResponseWriter writer)
 		{
-			return "Hello World";
+			this.writer = writer;
 		}
-	}	
+		
+		public void Process(HttpContext context)
+		{
+			this.writer.Write(BockitResponse.Ok(), context.Response);
+		}
+	}
 }
