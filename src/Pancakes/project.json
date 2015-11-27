@@ -13,9 +13,9 @@
     "defaultNamespace": "Pancakes"
   },
   "frameworks": {
-    "dnx451": {},
+    "dnx451": {}
   },
   "dependencies": {
-    "Newtonsoft.json": "8.0.1-beta3"
+    "Newtonsoft.json": "7.0.1"
   }
 }

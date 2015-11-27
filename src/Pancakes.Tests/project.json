@@ -1,14 +1,17 @@
 {
   "version": "1.0.0-*",
   "description": "",
-  "authors": [ "" ],
-  "tags": [ "" ],
+  "authors": [
+    ""
+  ],
+  "tags": [
+    ""
+  ],
   "projectUrl": "",
   "licenseUrl": "",
   "tooling": {
     "defaultNamespace": "Pancakes.Tests"
   },
-
   "dependencies": {
     "Pancakes": "1.0.0",
     "xunit": "2.1.0",
@@ -17,8 +20,7 @@
   "commands": {
     "test": "xunit.runner.dnx"
   },
-
-  "frameworks" : {
-    "dnx451": { }
+  "frameworks": {
+    "dnx451": {}
   }
 }
