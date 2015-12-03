@@ -1,11 +1,11 @@
 using BockitServer.Services;
 using Microsoft.AspNet.Http;
-using NSubstitute;
+using Pancakes.TestUtilities;
 using Xunit;
 
 namespace BockitServer.Tests.Services
 {
-    public class ResponseWriterTests
+    public class ResponseWriterTests : BaseUnitTest<ResponseWriter>
 	{
 		public class Write : ResponseWriterTests
 		{
@@ -13,11 +13,9 @@ namespace BockitServer.Tests.Services
 			public void WritesResponseCorrectly()
 			{
 				var response = new BockitResponse { HttpCode = 200 };
-				var httpResponse = Substitute.For<HttpResponse>();
-				
-				var systemUnderTest = new ResponseWriter();
-				
-				systemUnderTest.Write(response, httpResponse);
+				var httpResponse = this.GetMock<HttpResponse>();
+											
+				this.SystemUnderTest.Write(response, httpResponse);
 				
 				Assert.Equal(200, httpResponse.StatusCode);
 				Assert.Equal("application/json", httpResponse.ContentType);
