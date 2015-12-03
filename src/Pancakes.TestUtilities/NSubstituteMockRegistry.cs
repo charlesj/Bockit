@@ -15,7 +15,7 @@ namespace Pancakes.TestUtilities
 		
         public object Get(Type type)
         {
-			if (this.registry.ContainsKey(type))
+			if (!this.registry.ContainsKey(type))
 			{
 				var mock = Substitute.For(new[] { type }, null);
 				this.registry.Add(type, mock);

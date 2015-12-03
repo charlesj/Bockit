@@ -1,9 +1,8 @@
-using System;
 using Xunit;
 
 namespace Pancakes.TestUtilities
 {
-	public class NSubstituteMockRegistryTests
+    public class NSubstituteMockRegistryTests
 	{
         private readonly NSubstituteMockRegistry SystemUnderTest;
 
@@ -19,9 +18,18 @@ namespace Pancakes.TestUtilities
 		}
 		
 		[Fact]
-		public void AttemptingToGetUnregisteredType_ReturnsMock()
+		public void ReturnedObject_CanBeCastToRequestedType()
 		{
-			
+			var constructed = this.SystemUnderTest.Get(typeof(ITestInterface));
+			Assert.IsAssignableFrom(typeof(ITestInterface), constructed);
+		}
+		
+		[Fact]
+		public void RequestingSameType_ReturnsSameObject()
+		{
+			var first = this.SystemUnderTest.Get(typeof(ITestInterface));
+			var second = this.SystemUnderTest.Get(typeof(ITestInterface));
+			Assert.Equal(first, second);
 		}
 		
 		public interface ITestInterface
