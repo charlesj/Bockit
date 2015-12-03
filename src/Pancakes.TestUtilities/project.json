@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0-*",
+  "description": "Pancakes.TestUtilities Class Library",
+  "authors": [
+    "Class Library template"
+  ],
+  "tags": [
+    ""
+  ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "tooling": {
+    "defaultNamespace": "Pancakes.TestUtilities"
+  },
+  "frameworks": {
+    "dnx451": {},
+  },
+  "dependencies": {
+    "nsubstitute": "1.9.2"
+  }
+}
