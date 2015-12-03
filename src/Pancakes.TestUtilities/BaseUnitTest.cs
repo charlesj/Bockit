@@ -11,7 +11,10 @@ namespace Pancakes.TestUtilities
         public BaseUnitTest()
 		{
 			this.mockRegistry = new NSubstituteMockRegistry();
+			this.SystemUnderTest = this.Build();
 		}
+		
+		public TSystemUnderTest SystemUnderTest {get; private set;}
 		
 		public TSystemUnderTest Build()
 		{

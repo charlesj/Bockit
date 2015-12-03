@@ -4,15 +4,24 @@ using Xunit;
 
 namespace Pancakes.Tests.TestUtilities
 {
-	public class BaseUnitTest
+	public class BaseUnitTestTests
 	{
+		public class SystemUnderTest
+		{
+			[Fact]
+			public void SystemUnderTest_AvailableUponInstantiation()
+			{
+				var sut = new BaseUnitTest<TypeWithInterfaceDependencies>();
+				Assert.NotNull(sut.SystemUnderTest);
+			}	
+		}
+		
 		public class Build
 		{
 			[Fact]
 			public void TypeWithMultipleConstructors_ThrowsException()
 			{
-				var sut = new BaseUnitTest<TypeWithMultipleConstructors>();
-				Assert.Throws<InvalidOperationException>(() => sut.Build());
+				Assert.Throws<InvalidOperationException>(() => new BaseUnitTest<TypeWithMultipleConstructors>());
 			}
 			
 			[Fact]
@@ -39,8 +48,7 @@ namespace Pancakes.Tests.TestUtilities
 			[Fact]
 			public void ThrowsException_WhenBuildingClassWithInappropriateDependencies()
 			{
-				var sut = new BaseUnitTest<TypeWithInappropriateDependencies>();
-				Assert.Throws<InvalidOperationException>(() => sut.Build());
+				Assert.Throws<InvalidOperationException>(() => new BaseUnitTest<TypeWithInappropriateDependencies>());
 			}
 		}
 		
