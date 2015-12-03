@@ -44,6 +44,34 @@ namespace Pancakes.Tests.TestUtilities
 			}
 		}
 		
+		public class Get
+		{
+			[Fact]
+			public void CanGetInstance()
+			{
+				var sut = new BaseUnitTest<TypeWithInterfaceDependencies>();
+				var bar = sut.GetMock<IBarService>();
+			}
+			
+			[Fact]
+			public void Instances_AreSingletons()
+			{
+				var sut = new BaseUnitTest<TypeWithInterfaceDependencies>();
+				var first = sut.GetMock<IBarService>();
+				var second = sut.GetMock<IBarService>();
+				Assert.Equal(first, second);
+			}
+			
+			[Fact]
+			public void Instances_AreSameAsSystemUnderTest()
+			{
+				var sut = new BaseUnitTest<TypeWithInterfaceDependencies>();
+				var first = sut.GetMock<IFooService>();
+				var second = sut.Build().FooService;
+				Assert.Equal(first, second);
+			}
+		}
+		
 		public class TypeWithInappropriateDependencies
 		{
 			public TypeWithInappropriateDependencies(string inappropriate)
@@ -53,9 +81,12 @@ namespace Pancakes.Tests.TestUtilities
 		public class TypeWithInterfaceDependencies
 		{
 			public TypeWithInterfaceDependencies(IFooService fooService, IBarService barService)
-			{
+			{ 
+				this.FooService = fooService;
 			}
-		}
+
+            public IFooService FooService { get; private set; }
+        }
 		
 		public class TypeWithAbstractDependcies
 		{

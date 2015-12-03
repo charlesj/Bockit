@@ -6,9 +6,15 @@ namespace Pancakes.TestUtilities
 {
 	public class BaseUnitTest<TSystemUnderTest>
 	{
+        private readonly NSubstituteMockRegistry mockRegistry;
+
+        public BaseUnitTest()
+		{
+			this.mockRegistry = new NSubstituteMockRegistry();
+		}
+		
 		public TSystemUnderTest Build()
 		{
-			var mockRegistry = new NSubstituteMockRegistry();
 			var constructorParams = new List<object>();
 			var constructors = (typeof(TSystemUnderTest)).GetConstructors();
 			if(constructors.Count() > 1)
@@ -28,5 +34,10 @@ namespace Pancakes.TestUtilities
 			var instance = constructor.Invoke(constructorParams.ToArray()); 
 			return (TSystemUnderTest)instance;
 		}
-	}
+
+        public TMockType GetMock<TMockType>()
+        {
+            return (TMockType)mockRegistry.Get(typeof(TMockType));
+        }
+    }
 }
